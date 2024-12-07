@@ -8,7 +8,6 @@ public class CommandInvoker
 {
     private Stack<ICommand> commandRegistry = new Stack<ICommand>();
 
-
     public void ProcessCommand(ICommand connamdToProcess)
     {
         ExecuteCommand(connamdToProcess);
@@ -41,5 +40,10 @@ public class CommandInvoker
     {
         return (commandRegistry.Peek() as UnitCommand).commandData.ActorPlayerID == GameService.Instance.PlayerService.ActivePlayerID;
     }
-    
+
+    public Stack<ICommand> GetReplayStack()
+    {
+        return commandRegistry;
+    }
+
 }

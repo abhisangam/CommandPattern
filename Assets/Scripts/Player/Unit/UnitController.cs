@@ -140,9 +140,18 @@ namespace Command.Player
         public void OnActionExecuted()
         {
             MoveToBattlePosition(originalPosition, null, false);
+            unitView.StartCoroutine(EndUnitActionSequence(
+                GameService.Instance.ReplayService.ReplayState == ReplayState.ACTIVE ? 1.0f : 0.0f
+            ));
+        }
+
+        private IEnumerator EndUnitActionSequence(float delay)
+        {
+            yield return new WaitForSeconds(delay);
             SetUsedState(UnitUsedState.USED);
             Owner.OnUnitTurnEnded();
             unitView.SetUnitIndicator(false);
+
         }
 
         public void ResetStats() => CurrentPower = unitScriptableObject.Power;

@@ -1,3 +1,4 @@
+using Command.Main;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,6 +32,10 @@ namespace Command.Player
 
         public void StartPlayerTurn()
         {
+            if(GameService.Instance.ReplayService.ReplayState == ReplayState.ACTIVE)
+            {
+                //Wait for a second before executing the next command.
+            }
             activeUnitIndex = 0;
             ResetAllUnitStates();
             TryStaringUnitTurn();
